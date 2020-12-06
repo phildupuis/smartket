@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.lmi.myapplication.ui.main.viewmodels.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?android:attr/actionBarSize"
+        tools:context=".ui.main.MainFragment">
+
+        <LinearLayout
+            android:id="@+id/form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/stockSymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="20dp"
+                    android:text="@{viewModel.stockSymbolLabel}"
+                    tools:text="Stock Symbol : " />
+
+                <EditText
+                    android:id="@+id/stockSymbolEntry"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@{viewModel.stockSymbolPlaceholder}"
+                    android:maxLines="1"
+                    tools:hint="TSLA" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="20dp"
+                    android:text="@{viewModel.socialMediaLabel}"
+                    tools:text="Social Media : " />
+
+                <Spinner
+                    android:id="@+id/socialMediaPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@{viewModel.socialMediaValues}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingEnd="20dp"
+                    android:text="@{viewModel.timeLapseInDayLabel}"
+                    tools:text="Time lapse in days : " />
+
+                <NumberPicker
+                    android:id="@+id/dayLenghtPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.checkForRecommendationButtonText}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/form"
+            tools:text="Check Recommendation" />
+
+        <TextView
+            android:id="@+id/postCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:text="@{viewModel.socialMediaCountResult}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/postCount">
+
+            <TableLayout
+                android:id="@+id/table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="0, 1, 2" />
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.lmi.myapplication.ui.main.viewmodels.RecommendationRowViewModel" />
+    </data>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_margin="1dp"
+        android:layout_weight="1"
+        android:background="#000000">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_column="0"
+            android:layout_margin="1dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="@{viewModel.date}"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_column="1"
+            android:layout_margin="1dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="@{viewModel.stockValue.toString()}"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_column="2"
+            android:layout_margin="1dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="@{viewModel.recommendation}"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+    </TableRow>
+</layout>
