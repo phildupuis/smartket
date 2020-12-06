@@ -74,10 +74,25 @@ class StockDataSourceMock : StockDataSource {
     ): Observable<DataResult<List<DayRecommendation>>> {
         val recommendations = BehaviorSubject.create<DataResult<List<DayRecommendation>>>()
 
+        val max = prices.maxOf {
+            it.first
+        }
+
+        val min = prices.minOf {
+            it.first
+        }
+
         val recommendationList = prices.map {
             val stockValue =
                 BigDecimal(it.first.toString()).setScale(2, RoundingMode.HALF_UP).toDouble()
-            DayRecommendationImpl(it.second, stockValue, Recommendation.HOLD.name)
+
+            val recommendation: Recommendation = when(it.first) {
+                max -> Recommendation.SELL
+                min -> Recommendation.BUY
+                else -> Recommendation.HOLD
+            }
+
+            DayRecommendationImpl(it.second, stockValue, recommendation.name)
         }
 
         recommendations.onNext(DataResultImpl(true, recommendationList))
