@@ -44,7 +44,10 @@ class StockDataSourceMock : StockDataSource {
 
             val pricesList: ArrayList<Pair<Double, Date>> = ArrayList()
             for (i in 0 until timeLapseInDays) {
-                latestPrice = generateRandomNumberInRange(latestPrice * (1 - PRICE_VARIATION_RANGE_PERCENTAGE), latestPrice * (1+ PRICE_VARIATION_RANGE_PERCENTAGE))
+                latestPrice = generateRandomNumberInRange(
+                    latestPrice * (1 - PRICE_VARIATION_RANGE_PERCENTAGE),
+                    latestPrice * (1 + PRICE_VARIATION_RANGE_PERCENTAGE)
+                )
                 pricesList.add(Pair(latestPrice, calendar.time))
                 calendar.add(Calendar.DAY_OF_MONTH, 1)
             }
@@ -86,7 +89,7 @@ class StockDataSourceMock : StockDataSource {
             val stockValue =
                 BigDecimal(it.first.toString()).setScale(2, RoundingMode.HALF_UP).toDouble()
 
-            val recommendation: Recommendation = when(it.first) {
+            val recommendation: Recommendation = when (it.first) {
                 max -> Recommendation.SELL
                 min -> Recommendation.BUY
                 else -> Recommendation.HOLD

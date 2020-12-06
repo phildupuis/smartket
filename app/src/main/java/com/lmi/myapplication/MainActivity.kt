@@ -1,7 +1,7 @@
 package com.lmi.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.lmi.myapplication.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
