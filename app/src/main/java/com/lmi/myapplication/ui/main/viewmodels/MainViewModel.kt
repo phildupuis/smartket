@@ -36,11 +36,14 @@ class MainViewModel : ViewModel() {
     )
 
     fun makeRecommendation(stockSymbol: String, timeLapseInDays: Int, socialMedia: String) {
-        recommendationUseCase.getSocialMediaCount(stockSymbol, socialMedia)
-            .subscribe {
-                socialMediaCountResult.value = String.format(SOCIAL_MEDIA_POST_COUNT, stockSymbol, it)
-            }
-            .addTo(compositeDisposable)
+        if (stockSymbol.isNotEmpty()) {
+            recommendationUseCase.getSocialMediaCount(stockSymbol, socialMedia)
+                .subscribe {
+                    socialMediaCountResult.value =
+                        String.format(SOCIAL_MEDIA_POST_COUNT, stockSymbol, it)
+                }
+                .addTo(compositeDisposable)
+        }
 
         recommendationUseCase.getRecommendationForStock(stockSymbol, socialMedia, timeLapseInDays)
             .subscribe {
